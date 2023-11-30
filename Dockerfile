@@ -3,7 +3,12 @@ FROM tomcat:latest
 ARG DB_PASS
 
 
-RUN apt update -y && apt upgrade -y && apt install -y python3 python3-pip git ant
+RUN apt-get update -y && apt-get upgrade -y && apt-get install -y python3 python3-pip git ant
+
+RUN mkdir -p /server
+RUN git clone https://github.com/pedestrianlove/ZeroJudge_Server_src.git /server
+WORKDIR /server
+RUN ant run
 
 COPY . /app
 WORKDIR /app
